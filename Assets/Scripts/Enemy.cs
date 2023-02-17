@@ -4,27 +4,31 @@ using UnityEngine;
 public class Enemy : Unit
 {
     [SerializeField]
-    int giveScore;
+    protected int giveScore;
 
-    WaitForSeconds hitEffectDelay = new WaitForSeconds(0.1f);
+    [SerializeField]
+    protected GameObject hitSpriteObj;
 
-    Color hitEffectColor = Color.red;
+    [HideInInspector]
+    public GameObject playerObj;
 
-    SpriteRenderer sr;
+    const string DESTORY_ZONE = "DestoryZone";
 
-    // Start is called before the first frame update
-    void Start()
+    const string PLAYER = "Player";
+
+    protected WaitForSeconds hitEffectDelay = new WaitForSeconds(0.05f);
+
+    private void Update()
     {
-        
+        Move();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected virtual void Move()
     {
-        
+        transform.Translate(Time.deltaTime * speed * Vector3.down);
     }
 
-    public override void Hit(int damage)
+    public override void Hit(float damage)
     {
         base.Hit(damage);
 
@@ -33,19 +37,33 @@ public class Enemy : Unit
 
     IEnumerator HitColorEffect()
     {
-        hitEffectColor.a = 0;
-        sr.color = hitEffectColor;
+        hitSpriteObj.SetActive(true);
 
         yield return hitEffectDelay;
 
-        hitEffectColor.a = 1;
-        sr.color = hitEffectColor;
+        hitSpriteObj.SetActive(false);
     }
 
     protected override void Dead()
     {
         BattleManager.instance.GetScore(giveScore);
-
+        EnemySpawner.instance.EnemyDeadCount++;
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(DESTORY_ZONE) || collision.gameObject.CompareTag(PLAYER))
+        {
+            if (collision.gameObject.CompareTag(PLAYER))
+            {
+                collision.gameObject.GetComponent<Unit>().Hit(damage);
+                Dead();
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }

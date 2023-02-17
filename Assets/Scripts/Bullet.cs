@@ -5,7 +5,9 @@ public abstract class Bullet : MonoBehaviour
     [SerializeField]
     string targetTag;
 
-    public int speed;
+    const string DESTROY_ZONE = "DestoryZone";
+
+    public float speed;
 
     public int damage;
 
@@ -14,13 +16,17 @@ public abstract class Bullet : MonoBehaviour
         Move();
     }
 
-    public abstract void Move();
+    protected abstract void Move();
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(targetTag))
+        if (collision.gameObject.CompareTag(targetTag) || collision.gameObject.CompareTag(DESTROY_ZONE))
         {
-            collision.gameObject.GetComponent<Unit>().Hit(damage);
+            if (collision.gameObject.CompareTag(targetTag))
+            {
+                collision.gameObject.GetComponent<Unit>().Hit(damage);
+            }
+
             Destroy(gameObject);
         }
     }

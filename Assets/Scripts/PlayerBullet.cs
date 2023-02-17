@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class PlayerBullet : Bullet
 {
-    Vector3 speedVector;
+    //Vector3 speedVector;
 
     private void Start()
     {
-        speedVector.y = speed;
+        //speedVector.y = speed;
     }
 
-    public override void Move()
+    protected override void Move()
     {
-        transform.position += speedVector * Time.deltaTime;
+        transform.Translate(speed * Time.deltaTime * Vector3.up);
+        //transform.position += speedVector * Time.deltaTime;
     }
 }

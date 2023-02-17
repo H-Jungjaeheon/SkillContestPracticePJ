@@ -138,4 +138,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTag: Enemy
   speed: 5
-  damage: 2
+  damage: 1

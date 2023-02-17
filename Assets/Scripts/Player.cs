@@ -8,9 +8,6 @@ public class Player : Unit
     #region 이동 관련 변수들
     [SerializeField]
     private Vector2 moveField;
-    
-    [SerializeField]
-    private float speed;
 
     [SerializeField]
     private Vector2 speedVector;
@@ -24,27 +21,31 @@ public class Player : Unit
 
     #region 체력 관련 모음
 
+    public override float Hp 
+    {
+        get => base.Hp;
+        set
+        {
+            if (value <= 0)
+            {
+                hp = 0;
+                Dead();
+            }
+            else
+            {
+                hp = value;
+
+                hpText.text = $"{value}%";
+                hpImage.fillAmount = value / maxHp;
+            }
+        }
+    }
+
     [SerializeField]
     Image hpImage;
 
     [SerializeField]
     Text hpText;
-
-    const int MAX_HP = 100;
-
-    public override float Hp
-    {
-        get
-        {
-            return hp;
-        }
-        set
-        {
-            hp = value;
-            hpText.text = $"{value}%";
-            hpImage.fillAmount = value / MAX_HP;
-        }
-    }
 
     #endregion
 
@@ -96,7 +97,8 @@ public class Player : Unit
 
     private void Start()
     {
-        bulletSpawnPlus.y = 1;
+        hp = maxHp;
+        bulletSpawnPlus.y = 0.25f;
         nowPos = transform.position;
         StartCoroutine(ViewChangeSkill());
         StartCoroutine(Skill());
@@ -117,9 +119,14 @@ public class Player : Unit
         Shoot();
     }
 
+    public override void Hit(float damage)
+    {
+        base.Hit(damage);
+    }
+
     private void Shoot()
     {
-        if (shootDelay >= nowShootDelay)
+        if (shootDelay <= nowShootDelay)
         {
             if (Input.GetMouseButton(0))
             {
@@ -129,7 +136,7 @@ public class Player : Unit
         }
         else
         {
-            shootDelay += Time.deltaTime;
+            nowShootDelay += Time.deltaTime;
         }
     }
 

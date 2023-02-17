@@ -5,6 +5,8 @@ using UnityEngine;
 public abstract class Unit : MonoBehaviour
 {
     [SerializeField]
+    protected float maxHp;
+
     protected float hp;
 
     public virtual float Hp
@@ -15,17 +17,32 @@ public abstract class Unit : MonoBehaviour
         }
         set
         {
-            value = hp;
+            if (value <= 0)
+            {
+                hp = 0;
+                Dead();
+            }
+            else
+            {
+                hp = value;
+            }
         }
     }
 
     [SerializeField]
-    protected float damage;
+    protected int damage;
+
+    [SerializeField]
+    protected float speed;
 
     public bool isDontHit;
 
+    void Awake()
+    {
+        hp = maxHp;
+    }
 
-    public virtual void Hit(int damage)
+    public virtual void Hit(float damage)
     {
         if (isDontHit == false)
         {

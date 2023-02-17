@@ -1,11 +1,26 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour
 {
     public static BattleManager instance;
 
     [SerializeField]
+    EnemySpawner enemySpawner;
+
+    [Header("점수 관련")]
+    [SerializeField]
     int score;
+
+    [SerializeField]
+    Text scoreText;
+
+    [Header("스테이지 관련")]
+    [SerializeField]
+    int nowStage;
+
 
     void Awake()
     {
@@ -18,17 +33,22 @@ public class BattleManager : MonoBehaviour
     public void GetScore(int nowGetScore)
     {
         score += nowGetScore;
+        scoreText.text = $"{score}";
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(StageStartAnim());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator StageStartAnim()
     {
-        
+        yield return null;
+        enemySpawner.StartCoroutine(enemySpawner.enemySpawn());
+    }
+
+    public IEnumerator StageClear()
+    {
+        yield return null;
     }
 }
