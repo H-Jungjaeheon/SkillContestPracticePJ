@@ -24,6 +24,7 @@ public class EnemySpawner : MonoBehaviour
 
     int entityIndex;
 
+    [SerializeField]
     int enemyDeadCount;
 
     public int EnemyDeadCount
@@ -36,7 +37,7 @@ public class EnemySpawner : MonoBehaviour
         {
             enemyDeadCount = value;
 
-            if (value <= 15)
+            if (value == 15)
             {
                 BossSpawn();
             }

@@ -837,7 +837,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 350, y: 0}
+  m_SizeDelta: {x: 300, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &775371587
 MonoBehaviour:
@@ -997,7 +997,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 350, y: 0}
+  m_SizeDelta: {x: 300, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1026369512
 MonoBehaviour:
@@ -1575,7 +1575,7 @@ Transform:
   m_GameObject: {fileID: 1603899920}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -3.5, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1659,7 +1659,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 12, y: 10}
+  m_Size: {x: 13, y: 10}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1703,6 +1703,7 @@ MonoBehaviour:
   enemys:
   - {fileID: 2613067140467099546, guid: 074f6e18d0e6c8649af2658f1c06c31e, type: 3}
   boss: {fileID: 4899554480703473111, guid: 555b876b92a12834b89a663b478cad62, type: 3}
+  enemyDeadCount: 14
 --- !u!4 &1644933781
 Transform:
   m_ObjectHideFlags: 0

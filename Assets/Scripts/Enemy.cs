@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Enemy : Unit
+public abstract class Enemy : Unit
 {
     [SerializeField]
     protected int giveScore;
@@ -18,21 +18,20 @@ public class Enemy : Unit
 
     protected WaitForSeconds hitEffectDelay = new WaitForSeconds(0.05f);
 
-    private void Update()
+    protected virtual void Update()
     {
         Move();
     }
 
-    protected virtual void Move()
-    {
-        transform.Translate(Time.deltaTime * speed * Vector3.down);
-    }
+    protected abstract void Move();
 
     public override void Hit(float damage)
     {
-        base.Hit(damage);
-
-        StartCoroutine(HitColorEffect());
+        if (isDontHit == false)
+        {
+            Hp -= damage;
+            StartCoroutine(HitColorEffect());
+        }
     }
 
     IEnumerator HitColorEffect()

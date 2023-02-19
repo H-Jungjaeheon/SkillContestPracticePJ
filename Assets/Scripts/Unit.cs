@@ -42,13 +42,7 @@ public abstract class Unit : MonoBehaviour
         hp = maxHp;
     }
 
-    public virtual void Hit(float damage)
-    {
-        if (isDontHit == false)
-        {
-            Hp -= damage;
-        }
-    }
+    public abstract void Hit(float damage);
 
     protected abstract void Dead();
 }

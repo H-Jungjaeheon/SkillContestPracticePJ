@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SuperBullet : Bullet
@@ -17,14 +16,20 @@ public class SuperBullet : Bullet
 
     bool isStop;
 
+    private void Start()
+    {
+        StartCoroutine(MovingShot());
+    }
+
     protected override void Move()
     {
         if (isStop == false)
         {
             speed += Time.deltaTime * 2;
+            transform.Translate(Time.deltaTime * speed * Vector2.down);
         }
 
-        if (bullet.transform.position.y <= -5)
+        if (transform.position.y <= -5 && isStop == false)
         {
             isStop = true;
 
@@ -33,39 +38,52 @@ public class SuperBullet : Bullet
 
             StartCoroutine(SpawnBullet());
         }
-        //angle += rotateSpeed * Time.deltaTime;
-        //radius += sizeSpeed * Time.deltaTime;
+    }
 
-        //circularPos.x = Mathf.Cos(angle * Mathf.Deg2Rad) * radius;
-        //circularPos.y = Mathf.Sin(angle * Mathf.Deg2Rad) * radius;
+    IEnumerator MovingShot()
+    {
+        WaitForSeconds delay = new WaitForSeconds(0.3f);
 
-        //transform.position = startPos + circularPos;
+        while (isStop == false)
+        {
+            for (int i = -90; i <= 90; i += 180)
+            {
+                Instantiate(bullet, transform.position, Quaternion.Euler(0f, 0f, i));
+            }
 
-        //if (sizeSpeed > earlySizeSpeed / 2)
-        //{
-        //    sizeSpeed -= Time.deltaTime / 2;
-        //}
+            yield return delay;
+        }
     }
 
     IEnumerator SpawnBullet()
     {
-        WaitForSeconds fireDelay = new WaitForSeconds(0.25f);
+        float shootDelay = 0.05f;
+        float curCount = 0;
 
-        float plusZ = 0;
-
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 4; i++)
         {
-            for (int current = 0; current < 360; current += 30)
+            for (int current = 0; current <= 360; current += 20)
             {
-                Instantiate(bullet, transform.position, Quaternion.Euler(0f, 0f, current + plusZ));
+                Instantiate(bullet, transform.position, Quaternion.Euler(0f, 0f, current));
             }
-            yield return fireDelay;
-        }
 
-        for (int current = 0; current < 360; current += 40)
-        {
-            var temp = Instantiate(bullet2, transform.position, bullet2.transform.rotation);
-            temp.SpawnSetting(current, 2.5f, 50f);
+            if (i * 0.2 == 0)
+            {
+                for (int current = 0; current < 360; current += 40)
+                {
+                    var temp = Instantiate(bullet2, transform.position, bullet2.transform.rotation);
+                    temp.SpawnSetting(current, 2.5f, 50f);
+                }
+            }
+
+            while (curCount < shootDelay)
+            {
+                curCount += Time.deltaTime;
+                yield return null;
+            }
+
+            curCount = 0f;
+            shootDelay += 0.05f;
         }
 
         Destroy(gameObject);

@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e40579c44a0c18f4f87362a2b258695f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 10
+  maxHp: 7
   damage: 5
   speed: 2
   isDontHit: 0

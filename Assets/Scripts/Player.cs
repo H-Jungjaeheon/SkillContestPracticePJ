@@ -121,14 +121,18 @@ public class Player : Unit
 
     public override void Hit(float damage)
     {
-        base.Hit(damage);
+        if (isDontHit == false)
+        {
+            Hp -= damage;
+            //StartCoroutine(HitColorEffect());
+        }
     }
 
     private void Shoot()
     {
         if (shootDelay <= nowShootDelay)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetKey(KeyCode.Z))
             {
                 Instantiate(bullet, transform.position + bulletSpawnPlus, bullet.transform.rotation);
                 nowShootDelay = 0;
