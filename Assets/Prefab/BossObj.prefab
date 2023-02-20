@@ -5063,7 +5063,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe7a703cb81e804e925388121b41a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 1000
+  maxHp: 150
   damage: 5
   speed: 1
   isDontHit: 0

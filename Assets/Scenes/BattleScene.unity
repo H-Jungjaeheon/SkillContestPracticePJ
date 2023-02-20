@@ -1659,7 +1659,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 13, y: 10}
+  m_Size: {x: 15, y: 10}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1703,7 +1703,7 @@ MonoBehaviour:
   enemys:
   - {fileID: 2613067140467099546, guid: 074f6e18d0e6c8649af2658f1c06c31e, type: 3}
   boss: {fileID: 4899554480703473111, guid: 555b876b92a12834b89a663b478cad62, type: 3}
-  enemyDeadCount: 14
+  enemyDeadCount: 7
 --- !u!4 &1644933781
 Transform:
   m_ObjectHideFlags: 0
