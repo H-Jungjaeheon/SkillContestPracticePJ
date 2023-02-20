@@ -68,6 +68,7 @@ public class FirstBoss : Enemy
                 while (transform.position.y >= 0)
                 {
                     transform.Translate(speed * Vector3.down * Time.deltaTime);
+                    yield return null;
                 }
 
                 laserObj.SetActive(true);
@@ -86,6 +87,7 @@ public class FirstBoss : Enemy
                 while (transform.position.y < 3)
                 {
                     transform.Translate(speed * Vector3.up * Time.deltaTime);
+                    yield return null;
                 }
 
                 StartCoroutine(Pattons(Random.Range(0, 3)));
@@ -108,7 +110,7 @@ public class FirstBoss : Enemy
 
     IEnumerator CircleShot()
     {
-        WaitForSeconds shotDelay = new WaitForSeconds(1.5f);
+        WaitForSeconds shotDelay = new WaitForSeconds(1f);
 
         int plusZ = 0;
 
@@ -119,7 +121,7 @@ public class FirstBoss : Enemy
                 Instantiate(bullet, transform.position, Quaternion.Euler(0f, 0f, curZ + plusZ));
             }
 
-            plusZ += 20;
+            plusZ += 25;
 
             yield return shotDelay;
         }

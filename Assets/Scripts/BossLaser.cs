@@ -27,6 +27,8 @@ public class BossLaser : MonoBehaviour
 
         transform.rotation = Quaternion.identity;
 
+        particleObj.transform.rotation = Quaternion.identity;
+
         StartCoroutine(LaserStart());
     }
 
@@ -51,12 +53,16 @@ public class BossLaser : MonoBehaviour
         while (curZ <= 360)
         {
             transform.rotation = Quaternion.Euler(0f, 0f, curZ);
+            particleObj.transform.rotation = Quaternion.Euler(0f, 0f, curZ);
             curZ += Time.deltaTime * spinSpeed;
             yield return null;
         }
 
         curZ = 0;
+    }
 
+    private void OnDisable()
+    {
         particleObj.SetActive(false);
     }
 

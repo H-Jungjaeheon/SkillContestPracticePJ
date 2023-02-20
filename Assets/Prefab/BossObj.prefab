@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e13a32cf9593c4499db96eb80064217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spinSpeed: 10
+  spinSpeed: 40
   particleObj: {fileID: 4847387971382403722}
   curZ: 0
 --- !u!1 &4847387971382403722
