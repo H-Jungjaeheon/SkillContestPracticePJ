@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : Unit
 {
@@ -283,7 +284,7 @@ public class Player : Unit
 
     protected override void Dead()
     {
-        Destroy(gameObject);
+        SceneManager.LoadScene("BattleScene");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

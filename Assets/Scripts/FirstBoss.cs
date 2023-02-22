@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FirstBoss : Enemy
 {
@@ -34,6 +34,7 @@ public class FirstBoss : Enemy
     {
         while (transform.position.y > 3)
         {
+            transform.Translate(Time.deltaTime * speed * Vector3.down);
             yield return null;
         }
 
@@ -90,6 +91,7 @@ public class FirstBoss : Enemy
                     yield return null;
                 }
 
+
                 StartCoroutine(Pattons(Random.Range(0, 3)));
 
                 break;
@@ -102,10 +104,7 @@ public class FirstBoss : Enemy
 
     protected override void Move()
     {
-        if (transform.position.y > 3)
-        {
-            transform.Translate(Time.deltaTime * speed * Vector3.down);
-        }
+        
     }
 
     IEnumerator CircleShot()
@@ -114,7 +113,7 @@ public class FirstBoss : Enemy
 
         int plusZ = 0;
 
-        for (int i = 0; i < 7; i++)
+        for (int i = 0; i < 10; i++)
         {
             for (int curZ = 0; curZ <= 360; curZ += 30)
             {
@@ -180,6 +179,12 @@ public class FirstBoss : Enemy
         transform.rotation = Quaternion.identity;
 
         StartCoroutine(Pattons(Random.Range(0, 3)));
+    }
+
+    protected override void Dead()
+    {
+        base.Dead();
+        SceneManager.LoadScene("GameClear");
     }
 
     IEnumerator RotatingMachineGun()
